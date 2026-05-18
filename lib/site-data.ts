@@ -492,12 +492,12 @@ export const brandNotes = [
 ];
 
 export const partners: PartnerEntry[] = [
-  { name: "Gamewright", logoPath: "/assets/partners/gamewright-logo.png" },
-  { name: "Grok Games", logoPath: "/assets/partners/grok-logo.png" },
-  { name: "Cocktail Games", logoPath: "/assets/partners/cocktail-logo.jpg" },
-  { name: "Cordilheira Games", logoPath: "/assets/partners/cordilheira-logo.png" },
-  { name: "Entro Games", logoPath: "/assets/partners/entro-logo.jpg" },
-  { name: "Asmadi Games", logoPath: "/assets/partners/asmadi-icon.png" },
+  { name: "Gamewright", logoPath: "/assets/partners/gamewright-logo.png", websiteUrl: "https://gamewright.com" },
+  { name: "Grok Games", logoPath: "/assets/partners/grok-logo.png", websiteUrl: "https://grokgames.com.br" },
+  { name: "Cocktail Games", logoPath: "/assets/partners/cocktail-logo.jpg", websiteUrl: "https://cocktailgames.com" },
+  { name: "Cordilheira Games", logoPath: "/assets/partners/cordilheira-logo.png", websiteUrl: "https://cordilheiragames.com.br" },
+  { name: "Entro Games", logoPath: "/assets/partners/entro-logo.jpg", websiteUrl: "https://entrogames.com" },
+  { name: "Asmadi Games", logoPath: "/assets/partners/asmadi-icon.png", websiteUrl: "https://asmadigames.com" },
   { name: "Party Games", logoPath: "/assets/partners/partygames-logo.png" },
   { name: "INEUJ", logoPath: "/assets/partners/ineuj-icon.png" },
 ];

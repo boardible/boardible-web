@@ -131,10 +131,17 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
 
         {partner?.logoPath ? (
           <section className="content-wrap page-section page-section-tight">
-            <div className="publisher-logo-badge">
-              <span className="detail-kicker">Publisher</span>
-              <Image src={partner.logoPath} alt={partner.name} width={200} height={80} className="partner-logo-image" />
-            </div>
+            {partner.websiteUrl ? (
+              <a className="publisher-logo-badge" href={partner.websiteUrl} target="_blank" rel="noreferrer" aria-label={`Visit ${partner.name} website`}>
+                <span className="detail-kicker">Publisher</span>
+                <Image src={partner.logoPath} alt={partner.name} width={200} height={80} className="partner-logo-image" />
+              </a>
+            ) : (
+              <div className="publisher-logo-badge">
+                <span className="detail-kicker">Publisher</span>
+                <Image src={partner.logoPath} alt={partner.name} width={200} height={80} className="partner-logo-image" />
+              </div>
+            )}
           </section>
         ) : null}
 

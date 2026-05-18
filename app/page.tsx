@@ -262,11 +262,30 @@ export default function Home() {
         <div className="content-wrap section-stack">
           <h2 className="partners-title-v2">Partners, Publishers, and Boardible Brands</h2>
           <div className="partner-row-v2 partner-logo-row">
-            {partners.map((partner) => (
-              <div key={partner.name} className="partner-logo-card">
-                {partner.logoPath ? <Image src={partner.logoPath} alt={partner.name} width={180} height={72} className="partner-logo-image" /> : <span>{partner.name}</span>}
-              </div>
-            ))}
+            {partners.map((partner) => {
+              const content = partner.logoPath ? <Image src={partner.logoPath} alt={partner.name} width={180} height={72} className="partner-logo-image" /> : <span>{partner.name}</span>;
+
+              if (partner.websiteUrl) {
+                return (
+                  <a
+                    key={partner.name}
+                    className="partner-logo-card"
+                    href={partner.websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Visit ${partner.name} website`}
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              return (
+                <div key={partner.name} className="partner-logo-card">
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
