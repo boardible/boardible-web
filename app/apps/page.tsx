@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { apps } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Apps",
+  description:
+    "Browse Boardible, Isso não é um Jogo, and Monstic TacToe with direct App Store and Google Play download links.",
+  alternates: {
+    canonical: "/apps",
+  },
+};
 
 const appsPageMedia: Partial<Record<(typeof apps)[number]["slug"], { src: string; alt: string; objectPosition: string }>> = {
   boardible: {

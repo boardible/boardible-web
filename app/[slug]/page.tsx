@@ -1,12 +1,47 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
+import { absoluteUrl } from "@/lib/seo";
 import { games, getAppBySlug, getGameBySlug, getGamesByApp, getPartnerByName } from "@/lib/site-data";
 
 export function generateStaticParams() {
   return games.map((game) => ({ slug: game.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const game = getGameBySlug(slug);
+
+  if (!game) {
+    return {};
+  }
+
+  const app = getAppBySlug(game.appSlug);
+
+  if (!app) {
+    return {};
+  }
+
+  return {
+    title: `${game.title} in ${app.name}`,
+    description: `${game.summary} Available in ${app.name} on the App Store and Google Play.`,
+    alternates: {
+      canonical: `/${game.slug}`,
+    },
+    openGraph: {
+      title: `${game.title} | ${app.name}`,
+      description: `${game.summary} Download ${app.name} to play it.`,
+      images: [
+        {
+          url: absoluteUrl(game.imagePath),
+          alt: game.title,
+        },
+      ],
+    },
+  };
 }
 
 export default async function GameDetailPage({ params }: { params: Promise<{ slug: string }> }) {

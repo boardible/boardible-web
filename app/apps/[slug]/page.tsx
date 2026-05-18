@@ -1,12 +1,41 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
+import { absoluteUrl } from "@/lib/seo";
 import { apps, getAppBySlug, getGamesByApp } from "@/lib/site-data";
 
 export function generateStaticParams() {
   return apps.map((app) => ({ slug: app.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const app = getAppBySlug(slug);
+
+  if (!app) {
+    return {};
+  }
+
+  return {
+    title: `${app.name} on App Store and Google Play`,
+    description: `${app.description} Download ${app.name} on the App Store and Google Play.`,
+    alternates: {
+      canonical: `/apps/${app.slug}`,
+    },
+    openGraph: {
+      title: `${app.name} | Boardible`,
+      description: `${app.description} Download now on iPhone and Android.`,
+      images: [
+        {
+          url: absoluteUrl(app.heroPath),
+          alt: app.heroAlt,
+        },
+      ],
+    },
+  };
 }
 
 export default async function AppDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -18,9 +47,25 @@ export default async function AppDetailPage({ params }: { params: Promise<{ slug
   }
 
   const appGames = getGamesByApp(app.slug);
+  const appSchema = {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: app.name,
+    description: app.description,
+    operatingSystem: "iOS, Android",
+    applicationCategory: "GameApplication",
+    image: absoluteUrl(app.iconPath),
+    downloadUrl: [app.iosUrl, app.androidUrl],
+    publisher: {
+      "@type": "Organization",
+      name: "Boardible",
+      url: "https://www.boardible.com",
+    },
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }} />
       <SiteHeader current="apps" />
       <main className="inner-page-shell">
         <section className={`content-wrap detail-hero detail-hero-${app.accent}`}>

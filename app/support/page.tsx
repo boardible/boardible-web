@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { apps } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Support",
+  description:
+    "Boardible support, billing help, privacy contact, and official download links for Boardible, Isso não é um Jogo, and Monstic TacToe.",
+  alternates: {
+    canonical: "/support",
+  },
+};
 
 export default function SupportPage() {
   const [boardibleApp, ineujApp, monsticApp] = apps;

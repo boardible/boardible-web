@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 import { apps, getGamesByApp } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Games Catalog",
+  description:
+    "Explore the verified Boardible catalog across Boardible, Isso não é um Jogo, and Monstic TacToe, then jump to the right app for installation.",
+  alternates: {
+    canonical: "/games",
+  },
+};
 
 export default function GamesPage() {
   return (

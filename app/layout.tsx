@@ -16,20 +16,29 @@ const body = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.boardible.com"),
-  title: "Boardible | The Ultimate Digital Board Game Ecosystem",
+  title: {
+    default: "Boardible | Digital Board Games for iPhone and Android",
+    template: "%s | Boardible",
+  },
+  applicationName: "Boardible",
   description:
-    "Boardible builds vibrant digital board game experiences across mobile, shared-screen play and publisher-ready standalone products.",
+    "Boardible publishes digital board game experiences across iPhone, iPad, Android, shared-screen play, and standalone mobile products.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Boardible | The Ultimate Digital Board Game Ecosystem",
+    title: "Boardible | Digital Board Games for iPhone and Android",
     description:
-      "A bright, playful digital board game platform with multiple apps, original titles, publisher partnerships and global reach.",
+      "Discover Boardible, Isso não é um Jogo, and Monstic TacToe with direct App Store and Google Play download links.",
     type: "website",
+    url: "https://www.boardible.com",
+    siteName: "Boardible",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boardible | The Ultimate Digital Board Game Ecosystem",
+    title: "Boardible | Digital Board Games for iPhone and Android",
     description:
-      "A bright digital board game platform with mobile-first experiences, shared-screen play and publisher partnerships.",
+      "Discover Boardible apps and games with direct install links for the App Store and Google Play.",
   },
 };
 

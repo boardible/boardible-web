@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Icon, type IconName } from "@/components/icons";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
+import { absoluteUrl } from "@/lib/seo";
 import { apps, featureColumns, getFeaturedGames, heroMetrics, partners, publisherReasons } from "@/lib/site-data";
 
 const featureIcons: IconName[] = ["smartphone", "tv", "groups"];
@@ -19,11 +21,53 @@ const homeHeroMedia = {
   },
 };
 
+export const metadata: Metadata = {
+  title: "Digital Board Games for iPhone and Android",
+  description:
+    "Download Boardible, Isso não é um Jogo, and Monstic TacToe from the App Store and Google Play. Explore 20 live digital board and card game experiences.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Boardible | Digital Board Games for iPhone and Android",
+    description:
+      "Download Boardible apps and explore mobile-first board and card games with direct App Store and Google Play links.",
+    images: [
+      {
+        url: absoluteUrl("/assets/home/boardible-hero.png"),
+        alt: "Boardible digital board game ecosystem",
+      },
+    ],
+  },
+};
+
 export default function Home() {
   const [boardibleApp, ineujApp, monsticApp] = apps;
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "Boardible",
+        url: "https://www.boardible.com",
+        logo: absoluteUrl("/assets/boardible-mark.png"),
+      },
+      {
+        "@type": "ItemList",
+        name: "Boardible apps",
+        itemListElement: apps.map((app, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: absoluteUrl(`/apps/${app.slug}`),
+          name: app.name,
+        })),
+      },
+    ],
+  };
 
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }} />
       <SiteHeader homeAnchors />
 
       <header id="top" className="hero-section-v2">
